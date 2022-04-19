@@ -18,6 +18,12 @@ crosswalk = pd.read_csv("Documents/GitHub/kokarski_machine-learning_mini1/PPHA_3
 newipums = ipums.assign(EDUCDC=0)
 newipums = newipums.assign(HSDIP=0)
 newipums = newipums.assign(CSDIP=0)
+newipums = newipums.assign(BLACK=0)
+newipums = newipums.assign(WHITE=0)
+newipums = newipums.assign(HISPANIC=0)
+newipums = newipums.assign(MARRIED=0)
+newipums = newipums.assign(FEMALE=0)
+newipums = newipums.assign(VET=0)
 
 for x in range(0, len(newipums.EDUCDC)):
     tempeduc = newipums.EDUCD[x]
@@ -31,3 +37,22 @@ for x in range(0, len(newipums.EDUCDC)):
 # csdip 101 and 116 (inclusive)
     if(newipums.EDUCD[x] >= 101 and newipums.EDUCD[x] <= 116):
         newipums.CSDIP[x] = 1
+# 1= white, 2= black
+    if(newipums.RACE[x] == 1):
+        newipums.WHITE[x] = 1
+    if(newipums.RACE[x] == 2):
+        newipums.BLACK[x] = 2
+# 0 if not hispanic >0 if hispanic
+    if(newipums.HISPAN[x] > 0):
+        newipums.HISPANIC[x] = 1
+# between 1 and 3 are married (inlcusive)
+    if(newipums.MARST[x] >= 1 and newipums.MARST[x] <= 3):
+        newipums.MARRIED[x] = 1
+# sex=2 is female
+    if(newipums.SEX[x] == 2):
+        newipums.FEMALE[x] = 1
+# vet status=2 are a vet
+    if(newipums.VETSTAT == 2):
+        newipums.VET[x] = 1
+        
+        

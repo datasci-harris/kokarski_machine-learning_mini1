@@ -16,4 +16,7 @@ crosswalk = pd.read_csv("Documents/GitHub/kokarski_machine-learning_mini1/PPHA_3
 # (2) variable creation (a)
 # mapping categorical education variable to continuous using crosswalk dataset
 newipums = ipums.assign(EDUCDC=0)
-for x in range(0, length(newipums.EDUCDC))
+for x in range(0, len(newipums.EDUCDC)):
+    tempeduc = newipums.EDUCD[x]
+    temppos = crosswalk.index(tempeduc)
+    newipums.EDUCDC[x] = crosswalk.educdc[temppos]

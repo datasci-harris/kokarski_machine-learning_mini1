@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 
 #import dataset
-ipums = pd.read_csv("Documents/GitHub/kokarski_machine-learning_mini1/ipumdataset.csv")
+ipums = pd.read_csv("Documents/GitHub/kokarski_machine-learning_mini1/usa_00003.csv")
 crosswalk = pd.read_csv("Documents/GitHub/kokarski_machine-learning_mini1/PPHA_30545_MP01-Crosswalk.csv")
 
 # (2) variable creation (a)
@@ -18,5 +18,7 @@ crosswalk = pd.read_csv("Documents/GitHub/kokarski_machine-learning_mini1/PPHA_3
 newipums = ipums.assign(EDUCDC=0)
 for x in range(0, len(newipums.EDUCDC)):
     tempeduc = newipums.EDUCD[x]
-    temppos = crosswalk.index(tempeduc)
+    temppos = crosswalk[crosswalk["educd"] == tempeduc].index.tolist()[0]
     newipums.EDUCDC[x] = crosswalk.educdc[temppos]
+   
+   
